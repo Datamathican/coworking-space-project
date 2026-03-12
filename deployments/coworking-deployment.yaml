@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coworking-app
+  labels:
+    app: coworking-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coworking-app
+  template:
+    metadata:
+      labels:
+        app: coworking-app
+    spec:
+      containers:
+      - name: coworking-app
+        # REPLACE WITH YOUR ACTUAL ECR IMAGE URI
+        image: 507628794275.dkr.ecr.us-east-1.amazonaws.com/coworking-app1.0.0
+        ports:
+        - containerPort: 5153
+        envFrom:
+        - configMapRef:
+            name: coworking-config
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
+        # Stand-out suggestion included
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
