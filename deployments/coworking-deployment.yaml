@@ -17,7 +17,7 @@ spec:
       containers:
       - name: coworking-app
         # REPLACE WITH YOUR ACTUAL ECR IMAGE URI
-        image: 507628794275.dkr.ecr.us-east-1.amazonaws.com/coworking-app1.0.0
+        image: 507628794275.dkr.ecr.us-east-1.amazonaws.com/coworking-app:1.0.0
         ports:
         - containerPort: 5153
         envFrom:
